@@ -4,3 +4,5 @@
 `docker build -t wings .`
 
 `docker run --rm -p 80:80 wings`
+
+Use docker desktop to manage builds.
