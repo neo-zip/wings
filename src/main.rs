@@ -11,9 +11,13 @@ fn handle_client(mut stream: TcpStream) {
     stream.read(&mut buffer).unwrap();
     let request = String::from_utf8_lossy(&buffer[..]);
     println!("Request: {}", request);
-    let response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n".to_owned() + &get_page("/index.html");
+
+    let path = request.split_whitespace().nth(1).unwrap();
+
+    let response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n".to_owned() + &get_page(path);
     stream.write(response.as_bytes()).unwrap();
     stream.flush().unwrap();
+
 }
 
 fn main() {
@@ -27,7 +31,7 @@ fn main() {
                 });
             }
             Err(e) => { 
-                eprintln!("Failed: {}", e);
+                println!("Failed: {}", e);
             }
         }
     }
