@@ -17,7 +17,6 @@ fn handle_client(mut stream: TcpStream) {
     let response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n".to_owned() + &get_page(path);
     stream.write(response.as_bytes()).unwrap();
     stream.flush().unwrap();
-
 }
 
 fn main() {
