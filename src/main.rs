@@ -8,14 +8,14 @@ use std::{thread, fs};
 
 fn get_page(path: &str) -> String {
     let file_path = if !path.split('/').last().unwrap_or("").contains('.') {
-        "public".to_owned() + path + "/index.html"
+        "app".to_owned() + path + "/index.html"
     } else {
-        "public".to_owned() + path
+        "app".to_owned() + path
     };
 
     match fs::read_to_string(&file_path) {
         Ok(file) => file,
-        Err(_) => fs::read_to_string("public/404/index.html").expect("404 page not found"),
+        Err(_) => fs::read_to_string("app/404/index.html").expect("404 page not found"),
     }
 }
 
